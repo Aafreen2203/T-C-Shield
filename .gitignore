@@ -1,0 +1,36 @@
+# Important: API Keys and Sensitive Data
+
+# NEVER commit these files:
+*.env
+.env
+.env.local
+.env.production
+config/secrets.json
+api-keys.txt
+keys.txt
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Development
+node_modules/
+npm-debug.log*
+.vscode/settings.json
+
+# Test files with sensitive data
+test-with-keys.html
+*-with-api-key.*
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log

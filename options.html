@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <title>T&C Shield Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>T&C Shield Settings</h1>
+        <p>Configure your privacy protection preferences</p>
+      </header>
+
+      <main>
+        <section class="settings-section">
+          <h2>🔍 Detection Settings</h2>
+
+          <div class="setting-item">
+            <label>
+              <input type="checkbox" id="enableHighlighting" checked />
+              <span class="checkmark"></span>
+              Highlight risky text on webpages
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <input type="checkbox" id="autoAnalyze" checked />
+              <span class="checkmark"></span>
+              Automatically analyze T&C pages
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label for="sensitivityLevel">Risk Detection Sensitivity:</label>
+            <select id="sensitivityLevel">
+              <option value="low">Low - Only obvious risks</option>
+              <option value="medium" selected>
+                Medium - Balanced detection
+              </option>
+              <option value="high">High - Flag potential concerns</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h2>🤖 AI Integration</h2>
+
+          <div class="setting-item">
+            <label>
+              <input type="checkbox" id="enableGPT" />
+              <span class="checkmark"></span>
+              Enable OpenAI GPT Analysis
+            </label>
+            <div
+              class="api-key-section"
+              id="gptKeySection"
+              style="display: none"
+            >
+              <input
+                type="password"
+                id="gptApiKey"
+                placeholder="Enter your OpenAI API key"
+              />
+              <small>Your API key is stored locally and never shared</small>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <input type="checkbox" id="enableHF" />
+              <span class="checkmark"></span>
+              Enable Hugging Face Models
+            </label>
+            <div
+              class="api-key-section"
+              id="hfKeySection"
+              style="display: none"
+            >
+              <input
+                type="password"
+                id="hfApiKey"
+                placeholder="Enter your Hugging Face API key"
+              />
+              <small>Used for specialized legal text analysis</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h2>📊 Custom Keywords</h2>
+          <p>Add your own risky phrases to detect</p>
+
+          <div class="custom-keywords">
+            <textarea
+              id="customKeywords"
+              placeholder="Enter custom risky phrases, one per line..."
+            ></textarea>
+            <button id="addKeywords" class="btn-primary">Add Keywords</button>
+          </div>
+
+          <div id="keywordsList" class="keywords-list"></div>
+        </section>
+
+        <section class="settings-section">
+          <h2>📈 Data & Privacy</h2>
+
+          <div class="setting-item">
+            <label>
+              <input type="checkbox" id="saveAnalytics" />
+              <span class="checkmark"></span>
+              Save analysis history (local only)
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <button id="clearData" class="btn-secondary">
+              Clear All Stored Data
+            </button>
+            <small>This will remove all saved analyses and settings</small>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <button id="saveSettings" class="btn-primary">Save Settings</button>
+        <button id="resetSettings" class="btn-secondary">
+          Reset to Defaults
+        </button>
+        <div class="status" id="saveStatus"></div>
+      </footer>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
