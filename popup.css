@@ -10,45 +10,58 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   width: 320px;
-  max-height: 500px;
-  overflow-y: auto;
-  background: transparent;
+  height: 500px;
+  overflow: hidden;
+  background: #f8fafc;
   color: #1f2937;
   line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
-/* Glassmorphism Container */
+/* Main Container */
 .glass-container {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 4px 16px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  margin: 8px;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: white;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
-/* Fallback for browsers without backdrop-filter support */
-@supports not (backdrop-filter: blur(10px)) {
-  .glass-container {
-    background: rgba(255, 255, 255, 0.9);
-  }
+/* Custom Scrollbar */
+.glass-container::-webkit-scrollbar {
+  width: 8px;
 }
+
+.glass-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.glass-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.glass-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
 
 /* Header Section */
 .header {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+  background: linear-gradient(135deg, #667eea, #764ba2);
   padding: 20px;
   display: flex;
   align-items: center;
-  border-radius: 16px 16px 0 0;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.2);
 }
 
 .header::before {
@@ -89,41 +102,57 @@ body {
   font-weight: 500;
   margin-bottom: 12px;
   padding: 12px 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .status.safe {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.3);
+  background: #f0fdf4;
+  border-color: #22c55e;
   color: #059669;
 }
 
+.status.safe::before {
+  content: "✓ ";
+  font-weight: bold;
+  margin-right: 4px;
+}
+
 .status.warning {
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.3);
+  background: #fffbeb;
+  border-color: #f59e0b;
   color: #d97706;
 }
 
+.status.warning::before {
+  content: "⚠ ";
+  font-weight: bold;
+  margin-right: 4px;
+}
+
 .status.danger {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
+  background: #fef2f2;
+  border-color: #ef4444;
   color: #dc2626;
+}
+
+.status.danger::before {
+  content: "⚠ ";
+  font-weight: bold;
+  margin-right: 4px;
 }
 
 /* Risk Summary */
 .risk-summary {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 12px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -148,10 +177,10 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 240px;
+  max-height: 280px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  scrollbar-color: #667eea #f1f5f9;
 }
 
 .risk-list::-webkit-scrollbar {
@@ -159,40 +188,39 @@ body {
 }
 
 .risk-list::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f1f5f9;
+  border-radius: 3px;
 }
 
 .risk-list::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 3px;
   transition: background 0.3s ease;
 }
 
 .risk-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
 }
 
 /* Risk Items */
 .risk-item {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
+  background: white;
+  border: 2px solid #f1f5f9;
+  border-radius: 8px;
   padding: 14px 16px;
   margin-bottom: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-.risk-item:hover {
+/* .risk-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.6);
-  border-color: rgba(255, 255, 255, 0.5);
-}
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+} */
 
 .risk-item:last-child {
   margin-bottom: 0;
@@ -350,17 +378,17 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
+  background: white;
   color: #374151;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: #f9fafb;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #d1d5db;
 }
 
 /* Footer */

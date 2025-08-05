@@ -6,6 +6,7 @@
 .env.local
 .env.production
 config/secrets.json
+config.dev.js
 api-keys.txt
 keys.txt
 

@@ -252,15 +252,35 @@ const privacyAnalyzer = new PrivacyPolicyAnalyzer();
 // Convenience functions for popup.js integration
 async function analyzeWithHuggingFace(text) {
   try {
-    // Get API key from Chrome storage - SECURE approach
-    const settings = await chrome.storage.sync.get(["hfApiKey", "enableHF"]);
+    let apiKey = null;
+    let enableHF = false;
 
-    if (!settings.enableHF || !settings.hfApiKey) {
-      console.log("Hugging Face analysis disabled or API key not configured");
-      return { error: "Hugging Face integration not configured" };
+    // Production: Get API key from Chrome storage (SECURE)
+    try {
+      const settings = await chrome.storage.sync.get(["hfApiKey", "enableHF"]);
+      apiKey = settings.hfApiKey;
+      enableHF = settings.enableHF;
+    } catch (error) {
+      console.log("Chrome storage not available, checking development config");
     }
 
-    const analyzer = new HuggingFaceAnalyzer(settings.hfApiKey);
+    // Development: Fallback to development config (LOCAL ONLY)
+    if (!apiKey && typeof window !== "undefined" && window.DEV_CONFIG) {
+      console.log("🔧 Using development configuration");
+      apiKey = window.DEV_CONFIG.HUGGINGFACE_API_KEY;
+      enableHF = apiKey && apiKey !== "your-api-key-here";
+    }
+
+    if (!enableHF || !apiKey || apiKey === "your-api-key-here") {
+      console.log("Hugging Face analysis disabled or API key not configured");
+      return {
+        error: "Hugging Face integration not configured",
+        hint: "Add your API key in Settings or development config",
+      };
+    }
+
+    console.log("🤖 Initializing Hugging Face analyzer...");
+    const analyzer = new HuggingFaceAnalyzer(apiKey);
 
     // Try multiple analysis approaches
     const results = {

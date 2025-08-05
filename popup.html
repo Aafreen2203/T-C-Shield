@@ -1,6 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>T&C Shield</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
@@ -31,6 +33,18 @@
         <small>Powered by AI Risk Detection</small>
       </div>
     </div>
+
+    <!-- Development config (only loads if file exists) -->
+    <script>
+      // Try to load development config (fails silently if not found)
+      const devScript = document.createElement("script");
+      devScript.src = "config.dev.js";
+      devScript.onerror = () =>
+        console.log(
+          "Development config not found (this is normal for production)"
+        );
+      document.head.appendChild(devScript);
+    </script>
 
     <script src="huggingface-analyze.js"></script>
     <script src="popup.js"></script>

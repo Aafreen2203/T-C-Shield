@@ -543,7 +543,7 @@ function displayResults(analysis, pageData) {
   risksEl.innerHTML = "";
 
   if (analysis.totalRisks === 0) {
-    displayStatus("✅ No obvious risks detected", "safe");
+    displayStatus("No obvious risks detected", "safe");
     riskSummaryEl.innerHTML = `
       <div style="text-align: center;">
         <strong>Clean Bill of Health!</strong><br>
@@ -559,7 +559,7 @@ function displayResults(analysis, pageData) {
           ? "warning"
           : "safe";
     displayStatus(
-      `⚠️ ${analysis.totalRisks} potential risk${analysis.totalRisks > 1 ? "s" : ""} found`,
+      `${analysis.totalRisks} potential risk${analysis.totalRisks > 1 ? "s" : ""} found`,
       riskLevel
     );
 

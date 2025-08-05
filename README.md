@@ -184,11 +184,41 @@ T&C-ChromeExtension/
 }
 ```
 
+## 🤖 AI Integration (Optional)
+
+The extension supports enhanced AI analysis using Hugging Face models for more sophisticated legal document analysis.
+
+### Setting Up AI Analysis
+
+You have two options for adding AI capabilities:
+
+#### Option 1: Production Setup (Recommended)
+
+1. Get your own API key from [Hugging Face](https://huggingface.co/settings/tokens)
+2. Click the Settings button (⚙️) in the extension popup
+3. Enter your API key and save
+4. The key is stored securely using Chrome's storage
+
+#### Option 2: Development Setup
+
+1. Create a file named `config.dev.js` in the extension folder
+2. Add your configuration:
+   ```javascript
+   window.DEV_CONFIG = {
+     HUGGINGFACE_API_KEY: "your_api_key_here", // Use your own key
+   };
+   ```
+3. This file is automatically ignored by git and won't be committed
+4. The extension will auto-detect and use this for development
+
+**Important**: Please use your own Hugging Face API key. The extension works perfectly without AI features if you prefer not to set up an API key.
+
 ## 🔐 Security Features
 
 ### API Key Management
 
 - **Chrome Storage**: API keys stored securely in Chrome's storage
+- **Development Config**: Local `config.dev.js` for development (never committed)
 - **No Hardcoding**: Never commits keys to source code
 - **Optional Integration**: Works fully without any API keys
 - **Settings Page**: Secure key input through options page
